@@ -8,14 +8,12 @@ import uuid, shutil
 class MainHandler(tornado.web.RequestHandler):
 
 
-	URL = ""
-
 	def post(self):
 
 		image_buffer = memoryview(self.request.body)
 
 		try:
-			print("entering One")
+
 			file_url = self.generate_url(image_buffer.tobytes())
 			#self.write(file_url + "\n")
 			self.write(file_url)
@@ -39,12 +37,10 @@ class MainHandler(tornado.web.RequestHandler):
 		except OSError:
 			pass
 		
-		print("hello There")
 		file_name = file_dir + str(uuid.uuid4()) +".jpg"
 
 		try :
 
-			print("hello again")
 			_file = open(file_name, 'wb')
 			_file.write(image_buffer)
 			_file.close()
