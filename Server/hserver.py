@@ -1,8 +1,9 @@
 from time import strftime
+
 import tornado.ioloop
 import tornado.web
-import random, os, sys, datetime
-import uuid, shutil
+import os, sys, datetime
+import uuid
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -13,7 +14,6 @@ class MainHandler(tornado.web.RequestHandler):
 		image_buffer = memoryview(self.request.body)
 
 		try:
-
 			file_url = self.generate_url(image_buffer.tobytes())
 			#self.write(file_url + "\n")
 			self.write(file_url)
@@ -45,7 +45,6 @@ class MainHandler(tornado.web.RequestHandler):
 			_file.write(image_buffer)
 			_file.close()
 			self.URL = baseURL+file_name
-			print("hello")
 			return  baseURL+file_name
 
 		except IOError or FileNotFoundError:
